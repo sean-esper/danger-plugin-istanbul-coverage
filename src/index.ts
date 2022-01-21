@@ -32,8 +32,8 @@ export declare function warn(message: string): void
 export declare function fail(message: string): void
 export declare function markdown(message: string): void
 
-function filterForCoveredFiles(basePath: string, files: string[], coverage: CoverageCollection): string[] {
-  return files.map(filename => path.resolve(basePath, filename)).filter(filename => coverage[filename] !== undefined)
+function filterForCoveredFiles(files: string[], coverage: CoverageCollection): string[] {
+  return files.filter(filename => coverage[filename] !== undefined)
 }
 
 function getFileSet(reportChangeType: ReportFileSet, all: string[], modified: string[], created: string[]): string[] {
@@ -209,8 +209,8 @@ export function istanbulCoverage(config?: Partial<Config>): Promise<void> {
   return gitProperties.then(values => {
     const gitRoot = values[0]
     const gitBranch = values[1]
-    const modifiedFiles = filterForCoveredFiles(gitRoot, danger.git.modified_files, coverage)
-    const createdFiles = filterForCoveredFiles(gitRoot, danger.git.created_files, coverage)
+    const modifiedFiles = filterForCoveredFiles(danger.git.modified_files, coverage)
+    const createdFiles = filterForCoveredFiles(danger.git.created_files, coverage)
     const allFiles = Object.keys(coverage).filter(filename => filename !== "total")
 
     const files = getFileSet(combinedConfig.reportFileSet, allFiles, modifiedFiles, createdFiles)

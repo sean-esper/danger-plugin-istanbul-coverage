@@ -1,5 +1,5 @@
 {
-  "name": "danger-plugin-istanbul-coverage",
+  "name": "esper-danger-plugin-istanbul-coverage",
   "description": "Danger.js plugin for monitoring istanbul code coverage on changed files.",
   "author": {
     "name": "Darcy Rayner",
